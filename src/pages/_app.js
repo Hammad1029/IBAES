@@ -9,6 +9,8 @@ import { AuthConsumer, AuthProvider } from '../contexts/auth-context';
 import { createEmotionCache } from '../utils/create-emotion-cache';
 import { registerChartJs } from '../utils/register-chart-js';
 import { theme } from '../theme';
+import store from '../redux/store';
+import { Provider } from 'react-redux';
 
 registerChartJs();
 
@@ -30,20 +32,22 @@ const App = (props) => {
           content="initial-scale=1, width=device-width"
         />
       </Head>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <AuthProvider>
-            <AuthConsumer>
-              {
-                (auth) => auth.isLoading
-                  ? <Fragment />
-                  : getLayout(<Component {...pageProps} />)
-              }
-            </AuthConsumer>
-          </AuthProvider>
-        </ThemeProvider>
-      </LocalizationProvider>
+      <Provider store={store}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <AuthProvider>
+              <AuthConsumer>
+                {
+                  (auth) => auth.isLoading
+                    ? <Fragment />
+                    : getLayout(<Component {...pageProps} />)
+                }
+              </AuthConsumer>
+            </AuthProvider>
+          </ThemeProvider>
+        </LocalizationProvider>
+      </Provider>
     </CacheProvider>
   );
 };
