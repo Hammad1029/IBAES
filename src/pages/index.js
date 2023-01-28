@@ -1,31 +1,26 @@
 import Head from 'next/head';
 import { Box, Container, Grid } from '@mui/material';
 import ModuleCard from '../components/dashboard/ModuleCard';
-import { LatestProducts } from '../components/dashboard/latest-products';
-import { Sales } from '../components/dashboard/sales';
-import { TasksProgress } from '../components/dashboard/tasks-progress';
-import { TotalCustomers } from '../components/dashboard/total-customers';
-import { TotalProfit } from '../components/dashboard/total-profit';
-import Countdown from '../components/dashboard/Countdown';
 import { DashboardLayout } from '../components/dashboard-layout';
 import { useDispatch, useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
 import { getCookie } from 'cookies-next';
 import { useEffect } from 'react';
 import jwt from "jsonwebtoken";
-import { logoutUser } from '../redux/auth.slice';
-import { logout } from '../utils';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import Leaderboard from '../components/dashboard/Leaderboard';
+import { logout } from '../utils';
+import { updateDashboard } from '../utils';
 
 const Page = ({ isAuthenticated }) => {
   const isLoggedIn = useSelector((state) => state.auth?.isLoggedIn);
+  const { modules, teamScores } = useSelector((state) => state.app);
 
   useEffect(() => {
     if (!isAuthenticated || !isLoggedIn) logout();
+    updateDashboard();
   }, [isAuthenticated, isLoggedIn]);
 
   return (
@@ -47,15 +42,9 @@ const Page = ({ isAuthenticated }) => {
             container
             spacing={3}
           >
-            {modules.map(i => (
-              <Grid
-                item
-                lg={3}
-                sm={6}
-                xl={3}
-                xs={12}
-              >
-                <ModuleCard cardDetails={i} />
+            {modules.map((i, idx) => (
+              <Grid item lg={3} sm={6} xl={3} xs={12}>
+                <ModuleCard cardDetails={{ ...i, icon: moduleIcons[idx] }} />
               </Grid>
             ))}
             <Grid
@@ -65,7 +54,10 @@ const Page = ({ isAuthenticated }) => {
               xl={9}
               xs={12}
             >
-              <Leaderboard />
+              <Leaderboard settings={{
+                blur: modules.filter(i => i.status === "Finished").length === 0,
+                data: teamScores.map(i => ({ ...i, name: i.username }))
+              }} />
             </Grid>
             {/* <Grid
               item
@@ -96,35 +88,15 @@ export const getServerSideProps = async ({ req, res }) => {
   if (!cookie) return { props: { isAuthenticated: false } };
 
   try {
-    const isAuthenticated = await jwt.verify(
+    const isAuthenticated = jwt.verify(
       cookie,
       process.env.JWT_KEY,
     );
-    return { props: { isAuthenticated: isAuthenticated } };
+    updateDashboard(req);
+    return { props: { isAuthenticated } };
   } catch (err) {
     return { props: { isAuthenticated: false } };
   }
 };
 
-const modules = [
-  {
-    name: "Bazaar",
-    status: "Pending",
-    icon: <ShowChartIcon />
-  },
-  {
-    name: "Idea Den",
-    status: "Ongoing",
-    icon: <LightbulbIcon />
-  },
-  {
-    name: "SBPI",
-    status: "Finished",
-    icon: <SportsEsportsIcon />
-  },
-  {
-    name: "Media Madness",
-    status: "Finished",
-    icon: <VideocamIcon />
-  },
-]
+const moduleIcons = [<ShowChartIcon />, <LightbulbIcon />, <SportsEsportsIcon />, <VideocamIcon />]

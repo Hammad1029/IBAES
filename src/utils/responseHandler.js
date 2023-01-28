@@ -14,6 +14,10 @@ export const responses = {
     success: {
         responseCode: "00",
         responseDescription: "Success"
+    },
+    internalServerError: {
+        responseCode: "500",
+        responseDescription: "Something went wrong"
     }
 }
 

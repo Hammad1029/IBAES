@@ -76,7 +76,11 @@ const StockTable = ({ settings, toggleModal, select }) => {
                                         </Typography>
                                     </TableCell>
                                     <TableCell>
-                                        <Chip label={`${item.owned} / ${formatCurrency(item.owned * item.pricePerShare)}`} color="primary" />
+                                        <Chip label={[
+                                            item.owned,
+                                            formatCurrency(item.owned * item.pricePerShare),
+                                            Math.floor(item.owned / item.quantity * 100) + "%"
+                                        ].join(" - ")} color="primary" />
                                     </TableCell>
                                     <TableCell>
                                         <Button variant="contained" color="success" onClick={handleClick(item)}>

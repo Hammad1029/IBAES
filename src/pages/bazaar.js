@@ -1,14 +1,7 @@
 import Head from 'next/head';
-import { Box, Container, Grid, Typography } from '@mui/material';
-import { CustomerListResults } from '../components/customer/customer-list-results';
-import { CustomerListToolbar } from '../components/customer/customer-list-toolbar';
+import { Box, Container, Grid } from '@mui/material';
 import { DashboardLayout } from '../components/dashboard-layout';
-import { customers } from '../__mocks__/customers';
-import Leaderboard from '../components/dashboard/Leaderboard';
-import Countdown from '../components/dashboard/Countdown';
 import ModuleCard from '../components/dashboard/ModuleCard';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
-import ShowChartIcon from '@mui/icons-material/ShowChart';
 import YouTube from 'react-youtube';
 import { useState } from 'react';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
@@ -50,8 +43,8 @@ const Page = () => {
                                 }} />
                             </Grid>
                         </Grid> */}
-                        <Grid container spacing={1}>
-                            <Grid item xs={8}
+                        <Grid container spacing={1} sx={{ mb: 2 }}>
+                            <Grid item lg={6} xl={8}
                                 sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
                                 <YouTube
                                     videoId="sUKwTVAc0Vo"
@@ -65,7 +58,7 @@ const Page = () => {
                                     }}
                                 />
                             </Grid>
-                            <Grid item xs={3}>
+                            <Grid item lg={12} xl={4}>
                                 <Grid container spacing={1}>
                                     {balances.map(balance => (
                                         <Grid item xs={12}>
@@ -81,7 +74,7 @@ const Page = () => {
                             </Grid>
                         </Grid>
                         <StockTable select={setSelectedStock} toggleModal={toggleModal} />
-                        <StockModal state={modal} toggle={toggleModal} details={selectedStock} />
+                        <StockModal state={modal} toggle={toggleModal} details={selectedStock} balances={balances} />
                     </Box>
                 </Container>
             </Box>

@@ -29,7 +29,7 @@ export default ({ settings }) => {
       <CardHeader title={config.name} />
       <PerfectScrollbar>
         <Box sx={{ minWidth: 800 }}>
-          <TableContainer component={Paper} sx={{overflowX:"scroll"}}>
+          <TableContainer component={Paper}>
             <Table>
               <TableHead>
                 <TableRow>
@@ -48,7 +48,7 @@ export default ({ settings }) => {
                 </TableRow>
               </TableHead>
               <TableBody sx={{ filter: config.blur ? "blur(3px)" : "none" }}>
-                {config.data.map((team) => (
+                {(config.blur ? dummyData : config.data).map((team) => (
                   <TableRow
                     hover
                     key={team.id}
@@ -86,13 +86,15 @@ export default ({ settings }) => {
   );
 }
 
+const dummyData = Array(5).fill({
+  id: 1,
+  name: "Buhat bara team name",
+  members: "Hammad, Abc, Xyz, Def",
+  score: 123,
+});
+
 const defaultConfig = {
   name: "Event Leaderboard",
-  data: Array(5).fill({
-    id: 1,
-    name: "Buhat bara team name",
-    members: "Hammad, Abc, Xyz, Def",
-    score: 123,
-  }),
+  data: dummyData,
   blur: false
 }

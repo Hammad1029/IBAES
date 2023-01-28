@@ -10,7 +10,7 @@ import { Google as GoogleIcon } from '../icons/google';
 import axios from 'axios';
 import { setCookie } from 'cookies-next';
 import { useDispatch, useSelector } from 'react-redux';
-import { absoluteUrl } from '../utils';
+import { absoluteUrl, getBaseURL } from '../utils';
 import { loginUser } from '../redux/auth.slice';
 
 const Login = (props) => {
@@ -32,10 +32,10 @@ const Login = (props) => {
     }),
     onSubmit: async (values) => {
       const res = await axios.post(`${props.baseApiUrl}/auth`, values);
-      const { responseCode, responseDescription, data } = res.data;
-      if (responseCode === "00" && data.token) {
-        setCookie('token', data.token);
-        dispatch(loginUser(data.user));
+      const { responseCode, responseDescription, data: { user, token, modules } } = res.data;
+      if (responseCode === "00" && token) {
+        setCookie('token', token);
+        dispatch(loginUser({ ...user, jwt: token }));
         Router.push("/");
       }
     }
@@ -125,12 +125,9 @@ const Login = (props) => {
 export default Login;
 
 export async function getServerSideProps(context) {
-  const { req } = context;
-  const { origin } = absoluteUrl(req);
-  const baseApiUrl = `${origin}/api`;
   return {
     props: {
-      baseApiUrl,
+      baseApiUrl: getBaseURL(context.req),
     },
   };
 }

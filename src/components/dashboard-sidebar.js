@@ -17,6 +17,7 @@ import ShowChartIcon from '@mui/icons-material/ShowChart';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import constants from '../constants';
 
 const items = [
   {
@@ -27,22 +28,22 @@ const items = [
   {
     href: '/bazaar',
     icon: (<ShowChartIcon fontSize="small" />),
-    title: 'Bazaar'
+    title: constants.bazaar
   },
   {
-    href: '/ideaden',
+    href: '/ideaDen',
     icon: (<LightbulbIcon fontSize="small" />),
-    title: 'Idea Den'
+    title: constants.ideaDen
   },
   {
     href: '/sbpi',
     icon: (<SportsEsportsIcon fontSize="small" />),
-    title: 'SBPI'
+    title: constants.sbpi
   },
   {
-    href: '/mediamadness',
+    href: '/mediaMadness',
     icon: (<VideocamIcon fontSize="small" />),
-    title: 'Media Madness'
+    title: constants.mediaMadness
   },
   // {
   //   href: '/customers',

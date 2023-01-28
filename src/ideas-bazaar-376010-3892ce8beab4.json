@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "ideas-bazaar-376010",
+  "private_key_id": "3892ce8beab4c9e6944048b8880c729d19a3b512",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDxUF3N6IqirrWg\nPTvBmjBjIJQM5NNL/QiLgTc3reT6hmt744K8h7mWjfqs1yOB1Vc3FC0QWZVlPw37\nNmhSo6QAhPj/59FMUY8Go1gO563O5BMUGSSoOd/fOvongKJfrJHvWN5SWofcyPbr\nOfwQDbGyp9pxO40Dwo17aKDzRM0xO9En/z7DblNAKwQ0rUXeT+b3+zYdxvW03aQN\nhNTdCqUrP0mv7u8pivKU1Isx5LoRv7KSa9v30GboYCqh/Cg3invJYpkH8NwKQpnc\nbY5ey341WdTqcCDxcQrxKJx5ErH4azFAfIiMR/0vGIv3s6jGtfmOgnEvADdQUgqx\nMNMu8nk1AgMBAAECggEAA7S+xA9KtcXmHzBhjw8dqCATdgE7p4Ka032oCfBfQGO5\nGd18IAYbmQ7UJzxknLVYkg16xbICg9wMjGug/Yfq2GEya8e1JK1p+2mdzBjNyAwj\nqN7b+8Nrx0NiHSIyHDMLyLe+Llialo71j9ZDo0F6lapTRgLqnwCpaJhKRIItfpCL\neqhPG8nfeoi6K2whl4VXBgrqOxnZ36KfebkFsL8zYre1JdmkGFwfiTbfoqaWvHBL\nPwdV0uKSrebjUaJgE+CzNMEt82EsVXzoksSJEZVMeMCMhfemNrkXdVWwWjAIFZ1E\nvK6kIpPJazYb530QCZwgStVvZ5wOYIO9F0Co4brUDwKBgQD8Sc290HO6cgq3HDre\nqzubU/J/Wqm82GmAF1KW+p/BzN5VbciAkEmTlC8Fuo87I9T4yrMlv2NKC7oT2D3C\nBZVBUYujceyGFeDScXuOoFezoOrHRTKu3+gEdcwEmJpYqC5eHix7jEVS8zd9JrDn\n8n5sPgtJuHxTcnKF7YmJxmLDAwKBgQD03TrYzRX/lbxrEgL+4PFPvXv9l/tF9qb7\nTjNoi9cUOVj5920G879MmoyiM35Y5cUpnFWuaCR6+gI7yjP7DQHMF9pXPXkGz9JP\n1Hi3m0JOkqXsEUsiXP+hx4BICxpMborR3/WMwPPJZFAtkU4pETf1WjMu097SjZjp\nGzZSl9EBZwKBgQDWXsPyoNhlOZf/RX6ETA2HC4rHSjtmWqEylR65aVYsL69P+cvf\n6jqKquRVwtMH1oeVq28UCQ8OEO7ZA+peHa5YZTj49cmbmaWCS6lIZNiAqqA0GIlb\nbKhSeeGUmjK0WJuln4/+nw8cz8t7jU/Olw9zXDjtOFRz95B2WoN+zVKIDwKBgFPp\nuK/xYFeNPdvHeWVVOv0jp2kZe0/XnhPDEdUDDzrsCDTpeOCICYe78vPnB6Z5X17K\nJ4a0Q8QtBzTsL3IaXAJQLk/1ThNqht06p//r4gZBNUE4D/J/wk7zql+GBoYo38Pa\npzCMMz9R9DQZdpqWPwIC3kVu8A5h3gQMgko9oq+DAoGAKywe6Ob6740TbiufChag\nKZ0wqoHHk60T4CCpVcHDFT3YAPkgnJBLAebzMjWxFBeCuoFhbAftKWzos3jOKWwH\n4LvbMrcHqANSBtH07M/bdQdMKDe373n7KbkdupuTbzPckGUgwZz+yRbOJWSL39PU\n2CLuIqOApejEW2ChS7CscEI=\n-----END PRIVATE KEY-----\n",
+  "client_email": "ibaes-ideas-sheets@ideas-bazaar-376010.iam.gserviceaccount.com",
+  "client_id": "108084087523861135899",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ibaes-ideas-sheets%40ideas-bazaar-376010.iam.gserviceaccount.com"
+}
