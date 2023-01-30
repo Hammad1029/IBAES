@@ -3,7 +3,10 @@ import { deleteCookie } from 'cookies-next';
 
 const initialState = {
     modules: [],
-    teamScores: []
+    teamScores: [],
+    userBalance: [],
+    stocks: [],
+    headlines: []
 };
 
 export const appSlice = createSlice({
@@ -11,8 +14,11 @@ export const appSlice = createSlice({
     initialState: initialState,
     reducers: {
         updateData: (state, action) => {
-            state.modules = action.payload.modules;
-            state.teamScores = action.payload.teamScores;
+            state.modules = action.payload.modules || [];
+            state.teamScores = action.payload.teamScores || [];
+            state.userBalance = action.payload.userBalance || [];
+            state.stocks = action.payload.stocks || [];
+            state.headlines = action.payload.headlines || [];
         },
     },
 });

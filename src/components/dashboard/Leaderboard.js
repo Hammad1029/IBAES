@@ -47,7 +47,7 @@ export default ({ settings }) => {
                   </TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody sx={{ filter: config.blur ? "blur(3px)" : "none" }}>
+              <TableBody sx={config.blur ? { filter: "blur(3px)", pointerEvents: "none", userSelect: "none" } : {}}>
                 {(config.blur ? dummyData : config.data).map((team) => (
                   <TableRow
                     hover

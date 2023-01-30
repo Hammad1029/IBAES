@@ -12,6 +12,18 @@ export const tabs = {
     modules: {
         name: "Modules & Leaderboards",
         range: "A:G"
+    },
+    balances: {
+        name: "Bazaar Balances",
+        range: "A:F"
+    },
+    stocks: {
+        name: "Bazaar Stocks",
+        range: "A:D"
+    },
+    headlines: {
+        name: "Bazaar Headlines",
+        range: "A:B"
     }
 }
 

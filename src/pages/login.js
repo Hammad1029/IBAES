@@ -32,7 +32,7 @@ const Login = (props) => {
     }),
     onSubmit: async (values) => {
       const res = await axios.post(`${props.baseApiUrl}/auth`, values);
-      const { responseCode, responseDescription, data: { user, token, modules } } = res.data;
+      const { responseCode, responseDescription, data: { user, token } } = res.data;
       if (responseCode === "00" && token) {
         setCookie('token', token);
         dispatch(loginUser({ ...user, jwt: token }));

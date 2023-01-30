@@ -11,12 +11,14 @@ import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import SavingsIcon from '@mui/icons-material/Savings';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import StockModal from '../components/StockModal';
+import { useSelector } from 'react-redux';
 
 const Page = () => {
-    const [balances, setBalances] = useState(initialBalances);
     const [modal, setModal] = useState(false);
     const [selectedStock, setSelectedStock] = useState({});
     const toggleModal = () => setModal(!modal);
+    const { headlines, stocks, userBalance } = useSelector(state => state.app);
+    const balances = getBalances(userBalance || {})
 
     return (
         <>
@@ -34,15 +36,6 @@ const Page = () => {
             >
                 <Container maxWidth={false}>
                     <Box>
-                        {/* <Grid container spacing={0}>
-                            <Grid item lg={3} sm={6} xl={3} xs={12} sx={{ mb: 5 }}>
-                                <ModuleCard cardDetails={{
-                                    name: "Bazaar",
-                                    status: "Pending",
-                                    icon: <ShowChartIcon />
-                                }} />
-                            </Grid>
-                        </Grid> */}
                         <Grid container spacing={1} sx={{ mb: 2 }}>
                             <Grid item lg={6} xl={8}
                                 sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
@@ -90,9 +83,12 @@ Page.getLayout = (page) => (
 
 export default Page;
 
-const initialBalances = [
-    { name: "Given", icon: <MonetizationOnIcon />, balance: 100000 },
-    { name: "Portfolio", icon: <AccountBalanceIcon />, balance: 50000 },
-    { name: "Left", icon: <SavingsIcon />, balance: 30000 },
-    { name: "Profit / Loss", icon: <CurrencyExchangeIcon />, balance: -20000 }
+const getBalances = (balances) => [
+    { name: "Given", icon: <MonetizationOnIcon />, balance: balances.initial || 0 },
+    { name: "Portfolio", icon: <AccountBalanceIcon />, balance: balances.portfolio || 0 },
+    { name: "Remaining", icon: <SavingsIcon />, balance: balances.remaining || 0 },
+    {
+        name: "Profit / Loss", icon: <CurrencyExchangeIcon />,
+        balance: (Number(balances.portfolio) + Number(balances.remaining) - Number(balances.initial)) || 0
+    }
 ]

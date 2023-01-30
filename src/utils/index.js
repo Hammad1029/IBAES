@@ -35,14 +35,15 @@ export const formatCurrency = (amount) => {
 }
 
 export const updateDashboard = async (req) => {
-    const { data: { responseCode, data: { modules, teamScores } } } = await axios.get(`${getBaseURL(req)}/updateDashboardCalls`);
-    if (responseCode === "00") store.dispatch(updateData({ modules, teamScores }))
+    const userId = store.getState().auth.user.id || 0;
+    const { data: { responseCode, data } } = await axios.post(`${getBaseURL(req)}/updateDashboardCalls`, { userId });
+    if (responseCode === "00") store.dispatch(updateData(data));
 }
 
 export const getBaseURL = (req) => `${absoluteUrl(req).origin}/api`;
 
 export const getLeaderboardData = (module) => {
-    const { teamScores, modules } = store.getState().app;
+    const { teamScores } = store.getState().app;
     const teamIds = Object.keys(module).filter(i => ["first", "second", "third", "fourth", "fifth"].includes(i)).map(i => module[i]);
     const teams = teamScores.filter(i => teamIds.includes(i.id)).map(i => ({ ...i, name: i.username }));
     return teams;

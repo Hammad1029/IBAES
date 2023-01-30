@@ -92,7 +92,6 @@ export const getServerSideProps = async ({ req, res }) => {
       cookie,
       process.env.JWT_KEY,
     );
-    updateDashboard(req);
     return { props: { isAuthenticated } };
   } catch (err) {
     return { props: { isAuthenticated: false } };
