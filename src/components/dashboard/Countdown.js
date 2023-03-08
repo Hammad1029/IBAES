@@ -18,86 +18,49 @@ export default ({ settings = {} }) => {
   }, [])
 
   return (
-    <Card sx={{ height: '100%' }}>
-      <CardHeader title="Time remaining till end of event" />
-      <Divider />
+    <Card sx={{ height: '100%', }}>
       <CardContent>
-        <Box style={{ display: "flex", alignItems: "center" }}>
-          {config.show.map((show, idx) => (
-            <>
-              {show &&
-                <Paper elevation={24} sx={{
-                  padding: idx < 2 ? 3 : 2, display: "flex", flexDirection: 'column',
-                  justifyContent: "center", alignItems: "center", width: "fit-content", mr: 5
-                }}>
-                  <Typography variant="h1" color="GrayText">
-                    {time[idx]}
-                  </Typography>
-                  <Typography variant="h5" color="GrayText">
-                    {denominations[idx]}
-                  </Typography>
-                </Paper>}
-            </>
-          ))}
-        </Box>
-        {/* 
-        <Box
-          sx={{
-            height: 300,
-            position: 'relative'
-          }}
+        <Grid
+          container
+          spacing={3}
+          sx={{ justifyContent: 'space-between', flexDirection: "column" }}
         >
-          <Doughnut
-            data={data}
-            options={options}
-          />
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            pt: 2
-          }}
-        >
-          {devices.map(({
-            color,
-            icon: Icon,
-            title,
-            value
-          }) => (
-            <Box
-              key={title}
-              sx={{
-                p: 1,
-                textAlign: 'center'
-              }}
-            >
-              <Icon color="action" />
-              <Typography
-                color="textPrimary"
-                variant="body1"
-              >
-                {title}
-              </Typography>
-              <Typography
-                style={{ color }}
-                variant="h4"
-              >
-                {value}
-                %
-              </Typography>
-            </Box>
-          ))}
-        </Box> */}
+          <Typography
+            color="textSecondary"
+            gutterBottom
+            variant="overline"
+            sx={{pl: 10}}
+          >
+            {config.title}
+          </Typography>
+          <Grid item sx={{ display: "flex" }}>
+            {config.show.map((show, idx) => (
+              <>
+                {show &&
+                  <Paper elevation={24} sx={{
+                    padding: idx < 2 ? 3 : 2, display: "flex", flexDirection: 'column',
+                    justifyContent: "center", alignItems: "center", width: "fit-content", mr: 5
+                  }}>
+                    <Typography variant="h5" color="GrayText">
+                      {time[idx]}
+                    </Typography>
+                    <Typography variant="caption" color="GrayText">
+                      {denominations[idx]}
+                    </Typography>
+                  </Paper>}
+              </>
+            ))}
+          </Grid>
+        </Grid>
       </CardContent>
-    </Card >
+    </Card>
   );
 };
 
 const defaultConfig = {
   show: Array(4).fill(true),
   timestamp: moment().unix(),
-  date: moment()
+  title: ""
 }
 
 const denominations = ["Days", "Hours", "Minutes", "Seconds"];

@@ -79,7 +79,7 @@ const Page = () => {
   return (
     <>
       <Head>
-        <title>Sign in | Material Kit</title>
+        <title>Sign in | IBAES - IDEAS</title>
       </Head>
       <Box
         component="main"

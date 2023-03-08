@@ -8,7 +8,7 @@ const Page = () => (
   <>
     <Head>
       <title>
-        Account | Material Kit
+        Account | IBAES - IDEAS
       </title>
     </Head>
     <Box

@@ -2,8 +2,9 @@ import { Avatar, Box, Card, CardContent, Grid, Typography } from '@mui/material'
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import MoneyIcon from '@mui/icons-material/Money';
+import constants from '../../constants';
 
-export default ({ cardDetails, sx }) => {
+export default ({ cardDetails, sx, children }) => {
   const { name, status, icon, textColor } = { ...defaultCard, ...(cardDetails || {}) };
   return (
     <Card sx={{ height: '100%', ...sx }}>
@@ -21,17 +22,18 @@ export default ({ cardDetails, sx }) => {
             >
               {status}
             </Typography>
-            <Typography
+            {children === undefined ? <Typography
               color={textColor}
               variant="h4"
             >
               {name}
-            </Typography>
+            </Typography> : children}
           </Grid>
           <Grid item>
             <Avatar
               sx={{
-                backgroundColor: status === "Pending" ? "#E27C00" : status === "Ongoing" ? "green" : "blue",
+                backgroundColor: status.toLowerCase() === constants.pending.toLowerCase() ?
+                  "#E27C00" : status.toLowerCase() === constants.ongoing.toLowerCase() ? "green" : "blue",
                 height: 56,
                 width: 56
               }}
@@ -47,7 +49,7 @@ export default ({ cardDetails, sx }) => {
 
 const defaultCard = {
   name: "",
-  status: "Pending", // pending, ongoing, finished
+  status: constants.pending, // pending, ongoing, finished
   icon: <SmartToyIcon />,
-  textColor: "textPrimary"
+  textColor: "textPrimary",
 }

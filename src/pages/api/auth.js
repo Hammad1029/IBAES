@@ -20,6 +20,6 @@ export default async (req, res) => {
         }
 
     } catch (e) {
-        return responseHandler(res, responses.internalServerError, { error: true })
+        return responseHandler(res, responses.internalServerError, { error: true, errorMsg: e })
     }
 }
