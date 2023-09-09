@@ -56,8 +56,8 @@ export default ({ settings }) => {
                     </TableCell>
                     <TableCell>
                       <Stack direction="row" spacing={1}>
-                        {team.members.split(",").map((memberName) => (
-                          <Chip label={memberName.trim()} color="primary" />
+                        {team.members.split(",").map((memberName,i) => (
+                          <Chip label={memberName.trim()} key={i} color="primary" />
                         ))}
                       </Stack>
                     </TableCell>

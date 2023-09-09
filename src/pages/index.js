@@ -39,7 +39,7 @@ const Page = ({ isAuthenticated }) => {
         <Container maxWidth={false}>
           <Grid container spacing={3}>
             {modules.map((i, idx) => (
-              <Grid item lg={3} sm={6} xl={3} xs={12}>
+              <Grid item key={idx} lg={3} sm={6} xl={3} xs={12}>
                 <ModuleCard cardDetails={{ ...i, icon: moduleIcons[idx] }} />
               </Grid>
             ))}
@@ -83,4 +83,4 @@ export const getServerSideProps = async ({ req, res }) => {
   }
 };
 
-const moduleIcons = [<ShowChartIcon />, <LightbulbIcon />, <SportsEsportsIcon />, <VideocamIcon />];
+const moduleIcons = [<ShowChartIcon key={1} />, <LightbulbIcon key={2} />, <SportsEsportsIcon key={3} />, <VideocamIcon key={4} />];

@@ -11,8 +11,8 @@ import { useEffect } from "react";
 
 const Page = ({ moduleName }) => {
   const { modules } = useSelector((state) => state.app);
-  const module = modules.filter((i) => i.name.toLowerCase() === moduleName.toLowerCase())[0];
-  const finished = module.status.toLowerCase() === constants.finished.toLowerCase();
+  const myModule = modules.filter((i) => i.name.toLowerCase() === moduleName.toLowerCase())[0];
+  const finished = myModule.status.toLowerCase() === constants.finished.toLowerCase();
 
   useEffect(() => {
     updateDashboard();
@@ -37,7 +37,7 @@ const Page = ({ moduleName }) => {
                 <ModuleCard
                   cardDetails={{
                     name: moduleName,
-                    status: module.status,
+                    status: myModule.status,
                     icon: <SportsEsportsIcon />,
                   }}
                 />

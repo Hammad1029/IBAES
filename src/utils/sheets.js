@@ -1,8 +1,10 @@
 import { google } from "googleapis";
 import _ from "lodash";
 import { camelCaseToNormal } from ".";
+import getConfig from 'next/config'
+import path from "node:path";
 
-export const keyFile = "/home/hammadulhaq/Documents/IBAES/public/static/ideas-bazaar-376010-3892ce8beab4.json";
+export const keyFile = "public/static/ideas-bazaar-376010-3892ce8beab4.json";
 export const sheetID = "183FupMBVN2VWdCLxYTNwcmzsnV_p3TQr07G87VBoVwk";
 
 export const tabs = {
@@ -34,7 +36,7 @@ export const tabs = {
 
 const getGoogleSheetClient = async () => {
   const auth = new google.auth.GoogleAuth({
-    keyFile: keyFile,
+    keyFile: path.resolve(getConfig().serverRuntimeConfig.PROJECT_ROOT, keyFile),
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
   const authClient = await auth.getClient();

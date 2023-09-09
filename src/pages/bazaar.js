@@ -38,8 +38,8 @@ const Page = (props) => {
 
   const dispatch = useDispatch();
 
-  const module = modules.filter((i) => i.name.toLowerCase() === moduleName.toLowerCase())[0];
-  const ongoing = module.status.toLowerCase() === constants.ongoing.toLocaleLowerCase();
+  const myModule = modules.filter((i) => i.name.toLowerCase() === moduleName.toLowerCase())[0];
+  const ongoing = myModule.status.toLowerCase() === constants.ongoing.toLocaleLowerCase();
 
   useEffect(() => {
     getHeadlines();
@@ -96,7 +96,7 @@ const Page = (props) => {
                 }}
               >
                 <Grid container spacing={1}>
-                  <Grid item xs={12} sx={{ display: "flex", alignItems:"center", justifyContent:"space-between" }}>
+                  <Grid item xs={12} sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                     <Typography variant="h4" fontWeight="300" sx={{ pb: 2 }}>
                       {headlines.nextHeadline
                         ? `Next headline in ${timer[0]} hours ${timer[1]} minutes ${timer[2]} seconds`
@@ -123,8 +123,8 @@ const Page = (props) => {
               </Grid>
               <Grid item lg={4} xl={4}>
                 <Grid container spacing={1}>
-                  {balances.map((balance) => (
-                    <Grid item xs={12}>
+                  {balances.map((balance, i) => (
+                    <Grid key={i} item xs={12}>
                       <ModuleCard
                         cardDetails={{
                           name: formatCurrency(balance.balance),
@@ -142,20 +142,19 @@ const Page = (props) => {
               select={setSelectedStock}
               toggleModal={toggleModal}
               settings={{
-                name: `Stock Market${
-                  headlines.nextHeadline
+                name: `Stock Market${headlines.nextHeadline
                     ? ` (Updating in ${timer[0]} hours ${timer[1]} minutes ${timer[2]} seconds)`
                     : ""
-                }`,
+                  }`,
                 blur: !ongoing,
                 data: ongoing
                   ? stocks.map((i) => ({
-                      ...i,
-                      owned: Number(
-                        (userBalance[i.companyName.toLowerCase()].replace("%", "") / 100) *
-                          i.quantity
-                      ),
-                    }))
+                    ...i,
+                    owned: Number(
+                      (userBalance[i.companyName.toLowerCase()].replace("%", "") / 100) *
+                      i.quantity
+                    ),
+                  }))
                   : undefined,
               }}
             />
@@ -186,8 +185,8 @@ const getBalances = (balances) => [
     icon: <CurrencyExchangeIcon />,
     balance:
       Number(balances.portfolio || 0) +
-        Number(balances.remaining || 0) -
-        Number(balances.initial || 0) || 0,
+      Number(balances.remaining || 0) -
+      Number(balances.initial || 0) || 0,
   },
 ];
 
