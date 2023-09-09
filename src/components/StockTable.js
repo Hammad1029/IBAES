@@ -13,8 +13,8 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  TableSortLabel,
-  Tooltip,
+  TableContainer,
+  Paper,
   Typography,
 } from "@mui/material";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
@@ -33,8 +33,8 @@ const StockTable = ({ settings, toggleModal, select }) => {
     <Card>
       <CardHeader title={config.name} />
       <PerfectScrollbar>
-        <Box sx={{ minWidth: 800 }}>
-          <Table>
+        <TableContainer component={Paper}>
+          <Table sx={{ overflowX: "auto" }}>
             <TableHead>
               <TableRow>
                 <TableCell>Company Name</TableCell>
@@ -56,10 +56,12 @@ const StockTable = ({ settings, toggleModal, select }) => {
                     <Typography variant="body1">{item.quantity}</Typography>
                   </TableCell>
                   <TableCell>
-                    <Typography variant="body1">{item.sold}</Typography>
+                    <Typography variant="body1">{item.sold ? Number(item.sold).toFixed(2) : 0}</Typography>
                   </TableCell>
                   <TableCell>
-                    <Typography variant="body1">{item.quantity - item.sold}</Typography>
+                    <Typography variant="body1">
+                      {(item.quantity - item.sold).toFixed(2)}
+                    </Typography>
                   </TableCell>
                   <TableCell>
                     <Typography variant="body1">{item.pricePerShare} PKR</Typography>
@@ -83,7 +85,7 @@ const StockTable = ({ settings, toggleModal, select }) => {
               ))}
             </TableBody>
           </Table>
-        </Box>
+        </TableContainer>
       </PerfectScrollbar>
     </Card>
   );

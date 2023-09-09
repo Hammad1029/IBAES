@@ -2,7 +2,7 @@ import { google } from "googleapis";
 import _ from "lodash";
 import { camelCaseToNormal } from ".";
 
-export const keyFile = "/Users/LAPTRADE/Desktop/IBAES/src/ideas-bazaar-376010-3892ce8beab4.json";
+export const keyFile = "/home/hammadulhaq/Documents/IBAES/public/static/ideas-bazaar-376010-3892ce8beab4.json";
 export const sheetID = "183FupMBVN2VWdCLxYTNwcmzsnV_p3TQr07G87VBoVwk";
 
 export const tabs = {

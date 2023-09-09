@@ -25,6 +25,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoader } from "../redux/app.slice";
 import axiosInstance from "../utils/interceptor";
+import constants from "../constants"
 
 const style = {
   position: "absolute",
@@ -180,7 +181,7 @@ const StockModal = ({ state, toggle, details, balances, baseApiUrl, getHeadlines
                     onChange={(e) => {
                       formik.setFieldValue(
                         "amount",
-                        (e.target.value * details.pricePerShare).toFixed(2)
+                        (e.target.value * details.pricePerShare).toFixed(constants.bazaarAccuracyDP)
                       );
                       formik.setFieldValue("quantity", e.target.value);
                     }}
@@ -204,7 +205,7 @@ const StockModal = ({ state, toggle, details, balances, baseApiUrl, getHeadlines
                       formik.setFieldValue("amount", e.target.value);
                       formik.setFieldValue(
                         "quantity",
-                        (e.target.value / details.pricePerShare).toFixed(2)
+                        (e.target.value / details.pricePerShare).toFixed(constants.bazaarAccuracyDP)
                       );
                     }}
                     type="number"

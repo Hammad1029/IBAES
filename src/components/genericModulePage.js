@@ -33,7 +33,7 @@ const Page = ({ moduleName }) => {
         <Container maxWidth={false}>
           <Box sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item lg={3} sm={6} xl={3} xs={12} sx={{ mb: 5 }}>
+              <Grid item lg={4} sm={6} xl={3} xs={12} sx={{ mb: 5 }}>
                 <ModuleCard
                   cardDetails={{
                     name: moduleName,

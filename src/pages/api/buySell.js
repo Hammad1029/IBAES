@@ -12,6 +12,20 @@ export default async (req, res) => {
       if (!userId || !quantity || !buySell || !pricePerShare || !companyName)
         return responseHandler(res, responses.badRequest, { error: true });
 
+      const buySellType = buySell.toLowerCase();
+      const stocks = await sheets.readGoogleSheet(sheets.tabs.stocks);
+      const balances = await sheets.readGoogleSheet(sheets.tabs.balances);
+      const stockIndex = _.findIndex(stocks, { companyName });
+      const balanceIndex = _.findIndex(balances, { userId });
+      const userOwnershipQuantity =
+        (Number(balances[balanceIndex][companyName.toLowerCase()].replace("%", "")) / 100) *
+        stocks[stockIndex].quantity;
+
+      if (buySellType === "buy" && quantity > stocks[stockIndex].quantity - stocks[stockIndex].sold)
+        return responseHandler(res, responses.notEnoughStocksAvailable);
+      else if (buySellType === "sell" && quantity > userOwnershipQuantity)
+        return responseHandler(res, responses.notEnoughStocksInPortfolio);
+
       const order = {
         companyName,
         type: buySell,
@@ -22,27 +36,19 @@ export default async (req, res) => {
       };
       await sheets.writeGoogleSheet(sheets.tabs.orders, order);
 
-      const buySellType = buySell.toLowerCase();
-
-      const stocks = await sheets.readGoogleSheet(sheets.tabs.stocks);
-      const stockIndex = _.findIndex(stocks, { companyName });
       stocks[stockIndex].sold =
         buySellType === "buy"
           ? Number(stocks[stockIndex].sold) + Number(quantity)
           : Number(stocks[stockIndex].sold) - Number(quantity);
       await sheets.updateGoogleSheet(sheets.tabs.stocks, stocks);
 
-      const balances = await sheets.readGoogleSheet(sheets.tabs.balances);
-      const balanceIndex = _.findIndex(balances, { userId });
       balances[balanceIndex].remaining =
         buySellType === "buy"
           ? Number(balances[balanceIndex].remaining) -
-            Number(quantity) * Number(pricePerShare).toFixed(2)
+            Number(quantity) * Number(pricePerShare).toFixed(constants.bazaarAccuracyDP)
           : Number(balances[balanceIndex].remaining) +
-            Number(quantity) * Number(pricePerShare).toFixed(2);
-      const userOwnershipQuantity =
-        (Number(balances[balanceIndex][companyName.toLowerCase()].replace("%", "")) / 100) *
-        stocks[stockIndex].quantity;
+            Number(quantity) * Number(pricePerShare).toFixed(constants.bazaarAccuracyDP);
+
       balances[balanceIndex][companyName.toLowerCase()] =
         parseFloat(
           ((buySellType === "buy"
@@ -50,7 +56,7 @@ export default async (req, res) => {
             : Number(userOwnershipQuantity) - Number(quantity)) /
             Number(stocks[stockIndex].quantity)) *
             100
-        ).toFixed(2) + "%";
+        ).toFixed(constants.bazaarAccuracyDP) + "%";
       await sheets.updateGoogleSheet(sheets.tabs.balances, balances);
 
       return responseHandler(res, responses.success, { data: stocks });

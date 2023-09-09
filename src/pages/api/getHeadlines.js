@@ -31,13 +31,6 @@ export default async (req, res) => {
       const userBal = balances.filter((i) => Number(i.userId) === Number(userId))[0];
       const stocks = await sheets.readGoogleSheet(sheets.tabs.stocks);
 
-      console.log(
-        "hiiii",
-        (Number(userBal[stocks[1].companyName.toLowerCase()].replace("%", "")) / 100) *
-          stocks[1].quantity *
-          stocks[1].pricePerShare
-      );
-
       const userBalance = {
         ...userBal,
         initial: userBal.initial,

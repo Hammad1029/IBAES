@@ -13,6 +13,8 @@ import store from "../redux/store";
 import { Provider } from "react-redux";
 import "react-notifications/lib/notifications.css";
 import { NotificationContainer } from "react-notifications";
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistStore } from 'redux-persist'
 
 registerChartJs();
 
@@ -22,6 +24,7 @@ const App = (props) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   const getLayout = Component.getLayout ?? ((page) => page);
+  const persistor = persistStore(store);
 
   return (
     <CacheProvider value={emotionCache}>
@@ -30,19 +33,21 @@ const App = (props) => {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <Provider store={store}>
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <NotificationContainer />
-            <AuthProvider>
-              <AuthConsumer>
-                {(auth) =>
-                  auth.isLoading ? <Fragment /> : getLayout(<Component {...pageProps} />)
-                }
-              </AuthConsumer>
-            </AuthProvider>
-          </ThemeProvider>
-        </LocalizationProvider>
+        <PersistGate loading={null} persistor={persistor}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <NotificationContainer />
+              <AuthProvider>
+                <AuthConsumer>
+                  {(auth) =>
+                    auth.isLoading ? <Fragment /> : getLayout(<Component {...pageProps} />)
+                  }
+                </AuthConsumer>
+              </AuthProvider>
+            </ThemeProvider>
+          </LocalizationProvider>
+        </PersistGate>
       </Provider>
     </CacheProvider>
   );

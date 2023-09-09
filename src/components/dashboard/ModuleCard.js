@@ -24,7 +24,7 @@ export default ({ cardDetails, sx, children }) => {
             </Typography>
             {children === undefined ? <Typography
               color={textColor}
-              variant="h4"
+              variant="h5"
             >
               {name}
             </Typography> : children}
@@ -34,8 +34,8 @@ export default ({ cardDetails, sx, children }) => {
               sx={{
                 backgroundColor: status.toLowerCase() === constants.pending.toLowerCase() ?
                   "#E27C00" : status.toLowerCase() === constants.ongoing.toLowerCase() ? "green" : "blue",
-                height: 56,
-                width: 56
+                height: 50,
+                width: 50
               }}
             >
               {icon}

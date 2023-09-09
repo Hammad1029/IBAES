@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { DashboardLayout } from "../components/dashboard-layout";
 import ModuleCard from "../components/dashboard/ModuleCard";
 import YouTube from "react-youtube";
@@ -86,7 +86,7 @@ const Page = (props) => {
             <Grid container spacing={1} sx={{ mb: 2 }}>
               <Grid
                 item
-                lg={6}
+                lg={8}
                 xl={8}
                 sx={{
                   display: "flex",
@@ -96,12 +96,15 @@ const Page = (props) => {
                 }}
               >
                 <Grid container spacing={1}>
-                  <Grid item xs={12}>
+                  <Grid item xs={12} sx={{ display: "flex", alignItems:"center", justifyContent:"space-between" }}>
                     <Typography variant="h4" fontWeight="300" sx={{ pb: 2 }}>
                       {headlines.nextHeadline
                         ? `Next headline in ${timer[0]} hours ${timer[1]} minutes ${timer[2]} seconds`
                         : "No more headlines"}
                     </Typography>
+                    <Button variant="contained" onClick={getHeadlines} sx={{ mr: 2 }}>
+                      Refresh
+                    </Button>
                   </Grid>
                   <Grid item xs={12}>
                     <YouTube
@@ -118,7 +121,7 @@ const Page = (props) => {
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item lg={12} xl={4}>
+              <Grid item lg={4} xl={4}>
                 <Grid container spacing={1}>
                   {balances.map((balance) => (
                     <Grid item xs={12}>

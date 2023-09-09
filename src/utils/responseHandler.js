@@ -4,7 +4,7 @@ export const responses = {
         responseDescription: "Bad request"
     },
     userNotFound: {
-        reponseCode: "404",
+        responseCode: "404",
         responseDescription: "User Not Found"
     },
     invalidPassword: {
@@ -14,6 +14,14 @@ export const responses = {
     success: {
         responseCode: "00",
         responseDescription: "Success"
+    },
+    notEnoughStocksAvailable: {
+        responseCode: "55",
+        responseDescription: "Not enough stocks available to buy"
+    },
+    notEnoughStocksInPortfolio: {
+        responseCode: "60",
+        responseDescription: "Not enough stocks in portfolio to sell"
     },
     internalServerError: {
         responseCode: "500",

@@ -10,4 +10,6 @@ export default {
 
   dateFormat: "DD-MM-yyyy HH:mm",
   dateFormatWS: "DD-MM-yyyy HH:mm:ss",
+
+  bazaarAccuracyDP: 10
 };
